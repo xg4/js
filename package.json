@@ -1,0 +1,20 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/xg4/js#readme",
+  "bugs": {
+    "url": "https://github.com/xg4/js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xg4/js.git"
+  },
+  "license": "MIT",
+  "author": "xg4 <xingor4@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
