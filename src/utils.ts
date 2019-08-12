@@ -1,3 +1,72 @@
+/**
+ * @description 检查是否是自身属性，还是原型链上的属性
+ * @param context
+ * @param key
+ */
+export function hasOwn(context: any, key: string) {
+  return Object.prototype.hasOwnProperty.call(context, key)
+}
+
+/**
+ * @description 将属性混合到目标对象中
+ * @param a
+ * @param b
+ */
+export function extend<T, P>(a: T, b: P): T & P {
+  const result: Partial<T & P> = {}
+  for (const prop in a) {
+    if (hasOwn(a, prop)) {
+      ;(result as T)[prop] = a[prop]
+    }
+  }
+  for (const prop in b) {
+    if (hasOwn(b, prop)) {
+      ;(result as P)[prop] = b[prop]
+    }
+  }
+  return result as T & P
+}
+
+/**
+ * @description
+ * @param arr
+ */
+export function uniqueArray(arr: any[]) {
+  return [...new Set(arr)]
+}
+
+/**
+ * @description 随机一个区间整数
+ * @param min [Number] 区间最小值
+ * @param max [Number] 区间最大值
+ */
+export function randomInt(min: number, max: number) {
+  if (min > max) {
+    ;[min, max] = [max, min]
+  }
+  return Math.floor(min + Math.random() * (max - min + 1))
+}
+
+/**
+ * @description
+ * @param value
+ */
+export function _toString(value: any) {
+  return Object.prototype.toString.call(value).slice(8, -1)
+}
+
+/**
+ * @description
+ * @param x
+ */
+export function isFunction(x: any): x is Function {
+  return _toString(x) === 'Function'
+}
+
+/**
+ * @description 休眠一定毫秒之后继续执行
+ * @param ms [Number]
+ */
 export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }

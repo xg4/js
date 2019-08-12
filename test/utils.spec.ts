@@ -1,6 +1,75 @@
-import { sleep, cached, camelize, hyphenate, capitalize } from '../src/utils'
+import {
+  sleep,
+  cached,
+  camelize,
+  hyphenate,
+  capitalize,
+  _toString,
+  isFunction,
+  randomInt,
+  uniqueArray,
+  hasOwn,
+  extend
+} from '../src/utils'
 
 describe('utils', () => {
+  test('has own hasOwnProperty', () => {
+    const foo = { a: 1, b: 2 }
+    expect(hasOwn(foo, 'a')).toBeTruthy()
+    expect(hasOwn(foo, 'toString')).toBeFalsy()
+    expect(hasOwn(foo, 'b')).toBeTruthy()
+    expect(foo.toString()).toBe('[object Object]')
+  })
+
+  test('extend', () => {
+    const foo = { a: 1 }
+    const bar = { b: 2, c: 3 }
+    expect(extend(foo, bar)).toStrictEqual({ a: 1, b: 2, c: 3 })
+  })
+
+  test('unique array', () => {
+    expect(uniqueArray([1, 2, 3, 4, 123, 1, 2, 3])).toStrictEqual([
+      1,
+      2,
+      3,
+      4,
+      123
+    ])
+  })
+
+  test('random int', () => {
+    expect(randomInt(1, 2)).toBeLessThanOrEqual(2)
+    expect(randomInt(1, 2)).toBeGreaterThanOrEqual(1)
+
+    expect(randomInt(-10, 100)).toBeLessThanOrEqual(100)
+    expect(randomInt(-10, 100)).toBeGreaterThanOrEqual(-10)
+  })
+
+  test('_toString', () => {
+    expect(_toString([])).toBe('Array')
+    expect(_toString({})).toBe('Object')
+    expect(_toString(123)).toBe('Number')
+    expect(_toString('foo')).toBe('String')
+    expect(_toString(true)).toBe('Boolean')
+    expect(_toString(/\d/g)).toBe('RegExp')
+    expect(_toString(Symbol('toString'))).toBe('Symbol')
+    expect(_toString(null)).toBe('Null')
+    expect(_toString(undefined)).toBe('Undefined')
+    expect(
+      _toString(function() {
+        return 'test'
+      })
+    ).toBe('Function')
+  })
+
+  test('is function', () => {
+    expect(isFunction(() => {})).toBeTruthy()
+    expect(isFunction({})).toBeFalsy()
+    expect(isFunction([])).toBeFalsy()
+    expect(isFunction(123)).toBeFalsy()
+    expect(isFunction('x')).toBeFalsy()
+  })
+
   test('sleep', () => {
     expect.assertions(1)
     return sleep(200).then(data => {
