@@ -1,15 +1,3 @@
-// export function _call(fn: Function, context: any = window, ...args: any[]) {
-//   // 生成唯一的 key ，避免同名属性被覆盖
-//   const key = Symbol('fn key')
-//   // 绑定 ctx 的 this
-//   context[key] = fn
-//   // 获得结果
-//   const result = (context as any)[key](...args)
-//   // 删除 ctx 上的函数
-//   delete (context as any)[key]
-//   return result
-// }
-
 interface Function {
   _apply(this: Function, thisArg: any, argArray?: any): any
 
