@@ -48,22 +48,6 @@ export function randomInt(min: number, max: number) {
 }
 
 /**
- * @description
- * @param value
- */
-export function _toString(value: any) {
-  return Object.prototype.toString.call(value).slice(8, -1)
-}
-
-/**
- * @description
- * @param x
- */
-export function isFunction(x: any): x is Function {
-  return _toString(x) === 'Function'
-}
-
-/**
  * @description 休眠一定毫秒之后继续执行
  * @param ms [Number]
  */
