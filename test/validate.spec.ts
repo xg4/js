@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   _toString,
   isFunction,
@@ -49,6 +50,23 @@ describe('validate', () => {
     expect(isObject(/\d/)).toBeTruthy()
     expect(isObject(() => {})).toBeTruthy()
     expect(isObject(class X {})).toBeTruthy()
+
+    // lodash
+    const values = [
+      null,
+      undefined,
+      123,
+      'string',
+      true,
+      Symbol('symbol'),
+      [],
+      {},
+      /RegExp/,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      function() {},
+      class {}
+    ]
+    values.forEach(value => expect(isObject(value)).toEqual(_.isObject(value)))
   })
 
   test('is static', () => {
