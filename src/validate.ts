@@ -42,7 +42,7 @@ export function isPrimitive(x: any) {
  */
 export function isObject(x: any) {
   const type = typeof x
-  return x !== null && (type === 'object' || type === 'function')
+  return x != null && (type === 'object' || type === 'function')
 }
 
 /**
