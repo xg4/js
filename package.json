@@ -1,6 +1,6 @@
 {
   "name": "js",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/xg4/js#readme",
@@ -14,18 +14,25 @@
   "license": "MIT",
   "author": "xg4 <xingor4@gmail.com>",
   "scripts": {
+    "format": "prettier --write \"{src,test,examples}/**/*.{ts,tsx}\"",
     "lint": "eslint src/**/* --fix",
     "pretest": "npm run lint",
     "test": "jest",
     "test:cov": "npm run test -- --coverage",
-    "test:watch": "jest --watch --notify",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch"
+    "test:watch": "npm run test -- --watch --notify",
+    "types:check": "tsc --noEmit",
+    "types:watch": "npm run types:check -- --watch"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -39,22 +46,24 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.138",
-    "@typescript-eslint/eslint-plugin": "^2.1.0",
-    "@typescript-eslint/parser": "^2.1.0",
-    "eslint": "^6.3.0",
-    "eslint-config-prettier": "^6.2.0",
-    "eslint-plugin-jest": "^22.16.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^3.0.5",
-    "jest": "^24.9.0",
-    "lint-staged": "^9.2.5",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/jest": "^25.1.2",
+    "@types/lodash": "^4.14.149",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
+    "lint-staged": "^10.0.7",
     "lodash": "^4.17.15",
-    "prettier": "^1.18.2",
-    "typescript": "^3.6.2"
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
   }
 }
